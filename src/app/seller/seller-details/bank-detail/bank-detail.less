@@ -1,0 +1,87 @@
+.p-steps-item-number {
+  min-width: 20px !important;
+  height: 20px !important;
+}
+.p-steps-item .p-steps-item-number {
+  content-visibility: hidden !important;
+  border: 1px solid #ccc !important;
+  background: #ccc !important;
+  // background: #242251 !important;
+}
+.p-steps-item-active .p-steps-item-number {
+  // content-visibility: hidden !important;
+  border: 4px solid #3b82f6 !important;
+  background: #fff !important;
+}
+.p-steps-item-active .p-steps-item-label {
+  color: #3b82f6 !important;
+}
+.p-steps-item-active .p-steps-item-number.incompleted {
+  content-visibility: hidden !important;
+  background: #ccc !important;
+}
+.p-steps-item-active .p-steps-item-number.in-progress {
+  content-visibility: hidden !important;
+  background: red !important;
+}
+.p-steps-item:before {
+  border: 0.5px solid #3b82f6 !important;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px 30px;
+  width: 80%;
+  margin-top: 30px;
+  padding-left: 34px;
+}
+/* Each input block */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px !important;
+}
+/* Label */
+.form-field label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #565a5e;
+}
+/* Input Style */
+.form-field input[pInputText],
+.form-field .p-inputtext {
+  height: 40px;
+  // border-radius: 8px !important;
+  // border: 1px solid #cfd4d9 !important;
+  // padding: 8px 10px !important;
+  // font-size: 14px !important;
+}
+/* Calendar control behaves same */
+// .form-field .p-calendar .p-inputtext {
+//   height: 20px !important;
+//   border-radius: 8px !important;
+// }
+/* Responsive: 1 column on mobile */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 3px;
+}
+input.ng-invalid.ng-touched,
+input.ng-invalid.ng-dirty,
+.p-inputtext.ng-invalid.ng-touched,
+.p-inputtext.ng-invalid.ng-dirty {
+  border-color: #d32f2f !important;
+}
+p-datePicker.ng-invalid.ng-touched .p-inputtext,
+p-datePicker.ng-invalid.ng-dirty .p-inputtext {
+  border-color: #d32f2f !important;
+}
+.addButton {
+  margin: 40px;
+}

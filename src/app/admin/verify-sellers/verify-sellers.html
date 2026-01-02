@@ -1,0 +1,85 @@
+<!-- <p-breadcrumb [model]="breadcrumbItems" class="bread"></p-breadcrumb> -->
+<div class="header-row">
+    <div class="header-left">
+        <h3 class="title">Admin Master List <span class="pi pi-bookmark ml-2"></span></h3>
+    </div>
+    <!-- <button pButton class="headerBtn bg-blue-400 hover:bg-blue-600 border-none" (click)="addBusiness()"
+        icon="pi pi-plus">
+        Add Business
+    </button> -->
+</div>
+<p-tabs [(value)]="activeTabIndex" (valueChange)="onTabChange($event)" class="mb-4">
+    <p-tablist>
+        <!-- <p-tab value="0" (click)="getSellerList(activeTabIndex)">
+            Draft ({{draftCount}})
+        </p-tab> -->
+        <p-tab value="0" (click)="getSellerList(activeTabIndex)">
+            Pending ({{pendingCount}})
+        </p-tab>
+        <p-tab value="1" (click)="getSellerList(activeTabIndex)">
+            Approve ({{ approvelCount }})
+        </p-tab>
+        <p-tab value="2" (click)="getSellerList(activeTabIndex)">
+            Reject ({{ rejectCount }})
+        </p-tab>
+        <p-iconfield class="pt-3">
+            <p-inputicon class="pi pi-search " />
+            <input type="text" pInputText placeholder="Search" (input)="onSearch($event)" />
+        </p-iconfield>
+        <div class="btns card flex justify-center">
+            <div class="flex items-center ">
+                <p-button label="Show" variant="text" severity="secondary"
+                    (click)="showPopover.toggle($event)"></p-button>
+                <span class="p-2">/</span>
+                <p-button label="Hide" variant="text" severity="secondary"
+                    (click)="hidePopover.toggle($event)"></p-button>
+            </div>
+            <p-popover #showPopover>
+                <div class="w-56">
+                    <p-listbox [options]="fields" [(ngModel)]="showSelection" [checkbox]="true" [multiple]="true"
+                        optionLabel="label" optionValue="value" [filter]="true" scrollHeight="250px">
+                    </p-listbox>
+                    <div class="flex justify-between">
+                        <p-button class="p-2" label="Clear" (click)="clearShow()" severity="secondary"></p-button>
+                        <p-button class="p-2" label="Add" (click)="applyShow(showPopover)" severity="info"></p-button>
+                    </div>
+                </div>
+            </p-popover>
+            <p-popover #hidePopover>
+                <div class="w-40">
+                    <p-listbox [options]="fields" [(ngModel)]="hideSelection" [checkbox]="true" [multiple]="true"
+                        optionLabel="label" optionValue="value" [filter]="true" scrollHeight="250px">
+                    </p-listbox>
+                    <div class="flex justify-between">
+                        <p-button class="p-2" label="Clear" (click)="clearHide()" severity="secondary"></p-button>
+                        <p-button class="p-2" label="Add" (click)="applyHide(hidePopover)" severity="info"></p-button>
+                    </div>
+                </div>
+            </p-popover>
+        </div>
+    </p-tablist>
+</p-tabs>
+<p-dialog [(visible)]="showReasonDialog" [modal]="true" [style]="{ width: '450px' }" [closable]="false">
+    <div class="w-full">
+        <label class="block mb-2 font-semibold">
+            Reason / Comments *
+        </label>
+        <textarea rows="5" class="p-inputtext p-component w-full mb-4" [(ngModel)]="adminComment"
+            placeholder="Write a reason...">
+        </textarea>
+        <div class="flex justify-end gap-2 mt-3">
+            <p-button label="Cancel" severity="secondary" (click)="cancelDialog()">
+            </p-button>
+            <p-button label="Submit" severity="success" (click)="submitReason()">
+            </p-button>
+        </div>
+    </div>
+</p-dialog>
+<div class="seller-list-wrapper">
+    <app-smart-table [columns]="tableColumns" [actionBtns]="adminBtns" [showActions]="true" [data]="sellerList"
+        (edit)="editSeller($event)" (emitAction)="handleAction($event)"></app-smart-table>
+</div>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

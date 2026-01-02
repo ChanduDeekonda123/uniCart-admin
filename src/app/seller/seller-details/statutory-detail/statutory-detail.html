@@ -1,0 +1,111 @@
+<form [formGroup]="statutoryForm" class="form-grid">
+
+    <!-- Business Model -->
+    <div class="form-field">
+        <label>Business Model*</label>
+        <p-select [options]="business" optionLabel="name" optionValue="name" [filter]="true" filterBy="name"
+            formControlName="businessModel" placeholder="Select" autofocus="false">
+        </p-select>
+        <div class="error-box">
+            @if (isInvalid('businessModel')) {
+            <small class="error">Please select a business model.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Business Category -->
+    <div class="form-field">
+        <label>Business Category*</label>
+        <p-select [options]="businessCategory" optionLabel="name" optionValue="name" [filter]="true" filterBy="name"
+            formControlName="businessCategory" placeholder="Select">
+        </p-select>
+        <div class="error-box">
+            @if (isInvalid('businessCategory')) {
+            <small class="error">Please select a business category.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Primary Product Category -->
+    <div class="form-field">
+        <label>Primary Product Category*</label>
+        <p-select [options]="primaryProductCategory" optionLabel="name" optionValue="name" [filter]="true" filterBy="name"
+            formControlName="primaryProductCategory" placeholder="Select">
+        </p-select>
+        <div class="error-box">
+            @if (isInvalid('primaryProductCategory')) {
+            <small class="error">Please select a product category.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Domestic -->
+    <div class="form-field">
+        <label>Domestic*</label>
+        <input pInputText formControlName="domestic" />
+        <div class="error-box">
+            @if (isInvalid('domestic')) {
+            <small class="error">Domestic is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- PAN No -->
+    <div class="form-field">
+        <label>PAN No*</label>
+        <input pInputText formControlName="panNo" />
+        <div class="error-box">
+            @if (isInvalid('panNo')) {
+            <small class="error">PAN No is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Aadhar No -->
+    <div class="form-field">
+        <label>Aadhar No*</label>
+        <input pInputText formControlName="aadharNo" (input)="numbersOnly($event, 'aadharNo')" />
+        <div class="error-box">
+            @if (isInvalid('aadharNo')) {
+            <small class="error">Aadhar No is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- MSME No -->
+    <div class="form-field">
+        <label>MSME No*</label>
+        <input pInputText formControlName="msmeNo" (input)="numbersOnly($event, 'msmeNo')" />
+        <div class="error-box">
+            @if (isInvalid('msmeNo')) {
+            <small class="error">MSME No is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- PF No -->
+    <div class="form-field">
+        <label>PF No*</label>
+        <input pInputText formControlName="pfNo" (input)="numbersOnly($event, 'pfNo')" />
+        <div class="error-box">
+            @if (isInvalid('pfNo')) {
+            <small class="error">PF No is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- ESI No -->
+    <div class="form-field">
+        <label>ESI No*</label>
+        <input pInputText formControlName="esiNo" (input)="numbersOnly($event, 'esiNo')" />
+        <div class="error-box">
+            @if (isInvalid('esiNo')) {
+            <small class="error">ESI No is required.</small>
+            }
+        </div>
+    </div>
+</form>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

@@ -1,0 +1,152 @@
+h3 {
+  font-size: 20px;
+  color: #334155;
+}
+span {
+  font-size: 20px;
+  padding-left: 10px;
+}
+p-tab {
+  font-weight: 400;
+  padding: 25px;
+  color: #565a5e;
+}
+.p-tablist-active-bar {
+  z-index: 1;
+  display: block;
+  position: absolute;
+  inset-block-end: var(--p-tabs-active-bar-bottom);
+  height: var(--p-tabs-active-bar-height);
+  background-color: rgb(128, 124, 124);
+  transition: 250ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+.p-tab-active {
+  background: none !important;
+  border-bottom: 3px solid rgb(8, 174, 240) !important;
+  color: grey;
+}
+.p-inputtext {
+  width: 300px;
+  display: flex;
+}
+.filter-col label {
+    font-weight: 500 !important;
+    color: #565a5e!important;
+}
+/* wrapper for header */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 5px 0px 0px 10px;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap; /* allow wrap on small screens */
+}
+
+/* left side title */
+.header-left .title {
+  margin: 0;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* right side controls */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 15px;
+}
+
+/* search field size */
+.search-wrap .search-field {
+  min-width: 220px;
+  max-width: 360px;
+  width: 100%;
+}
+
+/* Add button styling */
+.add-btn {
+  white-space: nowrap;
+}
+
+/* Tabs row to force separate line */
+.tabs-row {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+/* Filters row: 4 columns */
+.filters-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* stack on small screens */
+}
+.filter-col {
+  display: flex;
+  flex-direction: column;
+  width: calc(25% - 0.75rem); /* four equal columns with gap */
+  min-width: 100px; /* prevent too small on small screens */
+}
+.filter-col label {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+/* Responsive: stack filters on small screens */
+@media (max-width: 900px) {
+  .filter-col {
+    width: 100%;
+  }
+  .search-wrap .search-field {
+    min-width: 160px;
+  }
+}
+.card {
+  padding: 5px 30px;
+}
+.text {
+  color: #6d7277;
+}
+.filter-col label{
+    font-weight: 500!important;
+}
+:host ::ng-deep .seller-list-wrapper .container {
+    margin: 20px 30px 0px 30px !important ;
+}
+:host ::ng-deep .seller-list-wrapper .p-inputtext {
+    display: none !important;
+}
+:host ::ng-deep .seller-list-wrapper .pi-search:before {
+    content: none !important;
+}
+:host ::ng-deep .seller-list-wrapper .container{
+  border-radius: 0px;
+}
+:host ::ng-deep .seller-list-wrapper .empty-msg {
+  text-align: center;
+  padding: 80px;
+}
+a .seller-list-wrapper .bottom-bar{
+  display: none !important;
+}
+
+.card  {
+    padding: 0px !important;
+    margin: 15px !important;
+}
+:host ::ng-deep .bottom-bar {
+    display: none !important;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    border-radius: 0 0 11px 11px;
+    flex-shrink: 0;
+}

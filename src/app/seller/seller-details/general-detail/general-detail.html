@@ -1,0 +1,131 @@
+<form [formGroup]="generalForm" class="form-grid">
+    <!-- Business Partner -->
+    <div class="form-field">
+        <label>Business Partner*</label>
+        <input #generalFocus pInputText formControlName="businessPartner" (keydown.enter)="focusNext(businessPartnerCode)" (blur)="getSequenceCode()" />
+        <div class="error-box">
+            @if (isInvalid('businessPartner')) {
+            <small class="error">Business Partner is required.</small>
+            }
+        </div>
+    </div>
+    <!-- Business Partner Code -->
+    <div class="form-field">
+        <label>Business Partner Code*</label>
+        <input #businessPartnerCode pInputText formControlName="businessPartnerCode" />
+        <div class="error-box">
+            @if (isInvalid('businessPartnerCode')) {
+            <small class="error">Business Partner Code is required.</small>
+            }
+        </div>
+    </div>
+    <!-- Actual Partner -->
+    <div class="form-field">
+        <label>Actual Partner*</label>
+        <input #actualPartner pInputText formControlName="actualPartner" (keydown.enter)="focusNext(city)" />
+        <div class="error-box">
+            @if (isInvalid('actualPartner')) {
+            <small class="error">Actual Partner is required.</small>
+            }
+        </div>
+    </div>
+    <!-- City -->
+    <div class="form-field">
+        <label>City*</label>
+        <input #city pInputText formControlName="city" (keydown.enter)="focusNext(state)" />
+        <div class="error-box">
+            @if (isInvalid('city')) {
+            <small class="error">City is required.</small>
+            }
+        </div>
+    </div>
+    <!-- State -->
+    <div class="form-field">
+        <label>State*</label>
+        <input #state pInputText formControlName="state" (keydown.enter)="focusNext(country)" />
+        <div class="error-box">
+            @if (isInvalid('state')) {
+            <small class="error">State is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Country -->
+    <div class="form-field">
+        <label>Country*</label>
+        <input #country pInputText formControlName="country" (keydown.enter)="focusNext(pincode)" />
+        <div class="error-box">
+            @if (isInvalid('country')) {
+            <small class="error">Country is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Zip Code -->
+    <div class="form-field">
+        <label>Pin Code*</label>
+        <input #pincode pInputText formControlName="pincode" pattern="[0-9]*" (input)="numbersOnlyZipcode($event)" (keydown.enter)="focusNext(currency)" />
+        <div class="error-box">
+            @if (isInvalid('pincode')) {
+            <small class="error">Pincode must be five digits.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Currency -->
+    <div class="form-field">
+        <label>Currency*</label>
+        <input #currency pInputText formControlName="currency" (keydown.enter)="focusNext(website)"/>
+        <div class="error-box">
+            @if (isInvalid('currency')) {
+            <small class="error">Currency is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Website -->
+    <div class="form-field">
+        <label>Website</label>
+        <input #website pInputText formControlName="website" placeholder="https://example.com" />
+        <div class="error-box">
+            @if (isInvalid('website')) {
+            <small class="error">Website is invalid.</small>
+            }
+        </div>
+    </div>
+
+    <div class="form-field status-field">
+        <label>Status</label>
+        <div class="status-row">
+            <p-toggleswitch formControlName="checked"></p-toggleswitch>
+            @if (generalForm.get('checked')?.value) {
+            <span class="active-msg">Active</span>
+            }
+        </div>
+    </div>
+
+    <!-- Old Partner Reference Code -->
+    <!-- <div class="form-field">1
+        <label>Old Partner Reference Code</label>
+        <input pInputText formControlName="oldPartnerRefCode" pattern="[0-9]*" (input)="numbersOnlyForRef($event)" />
+        <div class="error-box">
+            @if (isInvalid('oldPartnerRefCode')) {
+            <small class="error">Old Partner Ref Code is required.</small>
+            }
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label>Valid To</label>
+        <p-datePicker [showIcon]="true" [showOnFocus]="false" formControlName="validTo" />
+        <div class="error-box">
+            @if (isInvalid('validTo')) {
+            <small class="error">Valid To is required.</small>
+            }
+        </div>
+    </div> -->
+</form>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

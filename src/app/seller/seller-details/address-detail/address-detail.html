@@ -1,0 +1,122 @@
+<app-smart-table [columns]="myColumns" [disableSelection]="disabled" [data]="tableData" (onAdd)="openDrawer()">
+</app-smart-table>
+
+<p-drawer header="Add Address" [(visible)]="visible2" position="right" >
+    <p-divider />
+    <form [formGroup]="addressForm" class="form-grid">
+        <!-- Address Type -->
+        <div class="form-field">
+            <label>Address Type*</label>
+            <p-select #addressTypes [options]="addressType" optionLabel="name" optionValue="name" [filter]="true" filterBy="name"
+                placeholder="Select" formControlName="addressType" [showClear]="true" autofocus="false" (keydown.enter)="openSelect(addressTypes)" (keydown.enter)="focusNext(businessParther)" >
+            </p-select>
+            <div class="error-box">
+                @if(isInvalid('addressType')) {
+                <small class="error">Address Type is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Business Partner -->
+        <div class="form-field">
+            <label>Business Partner*</label>
+            <input #businessParther type="text" pInputText formControlName="businessParther" (keydown.enter)="focusNext(addressA)">
+            <div class="error-box">
+                @if(isInvalid('businessParther')) {
+                <small class="error">Business Partner is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Address A -->
+        <div class="form-field">
+            <label>Address A*</label>
+            <input #addressA type="text" pInputText formControlName="addressA" (keydown.enter)="focusNext(addressB)">
+            <div class="error-box">
+                @if(isInvalid('addressA')) {
+                <small class="error">Address A is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Address B -->
+        <div class="form-field">
+            <label>Address B*</label>
+            <input #addressB type="text" pInputText formControlName="addressB" (keydown.enter)="focusNext(landmark)">
+            <div class="error-box">
+                @if(isInvalid('addressB')) {
+                <small class="error">Address B is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Landmark -->
+        <div class="form-field">
+            <label>Landmark*</label>
+            <input #landmark type="text" pInputText formControlName="landmark" (keydown.enter)="focusNext(city)">
+            <div class="error-box">
+                @if(isInvalid('landmark')) {
+                <small class="error">Landmark is required.</small>
+                }
+            </div>
+        </div>
+        <!-- City -->
+        <div class="form-field">
+            <label>City*</label>
+            <input #city type="text" pInputText formControlName="city" (keydown.enter)="focusNext(state)">
+            <div class="error-box">
+                @if(isInvalid('city')) {
+                <small class="error">City is required.</small>
+                }
+            </div>
+        </div>
+        <!-- State -->
+        <div class="form-field">
+            <label>State*</label>
+            <input #state type="text" pInputText formControlName="state" (keydown.enter)="focusNext(country)">
+            <div class="error-box">
+                @if(isInvalid('state')) {
+                <small class="error">State is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Country -->
+        <div class="form-field">
+            <label>Country*</label>
+            <input #country type="text" pInputText formControlName="country" (keydown.enter)="focusNext(pincode)">
+            <div class="error-box">
+                @if(isInvalid('country')) {
+                <small class="error">Country is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Pincode -->
+        <div class="form-field">
+            <label>Pincode*</label>
+            <input #pincode type="text" pInputText formControlName="pincode" pattern="[0-9]*"
+                (input)="numbersOnlyZipcode($event)" (keydown.enter)="focusNext(isDefault)">
+            <div class="error-box">
+                @if(isInvalid('pincode')) {
+                <small class="error">Pincode is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Default Checkbox -->
+        <div class="form-field">
+            <div class="flex flex-wrap gap-2 mt-2">
+                <p-checkbox #isDefault formControlName="isDefault" binary="true" inputId="defaultCheck"></p-checkbox>
+                <label for="defaultCheck" style="margin-top: 4px;">Default</label>
+            </div>
+            <div class="error-box"></div>
+        </div>
+
+    </form>
+
+    <!-- Buttons -->
+    <div class="addButton flex flex-wrap gap-4">
+        <p-button class="button1" label="Add" [raised]="true" (click)="addItem()" [disabled]="addressForm.invalid"
+            severity="info" />
+        <p-button class="button2" label="Clear" variant="outlined" (click)="clearForm()" severity="secondary" />
+    </div>
+
+</p-drawer>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

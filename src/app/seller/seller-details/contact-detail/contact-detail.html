@@ -1,0 +1,108 @@
+<app-smart-table [columns]="myColumns" [data]="tableData" [disableSelection]="disabled" (onAdd)="openDrawer()">
+</app-smart-table>
+
+<p-drawer header="Add Contact" [(visible)]="visible2" position="right" (onShow)="focusFirstInput()">
+    <p-divider />
+
+    <form [formGroup]="contactForm" class="form-grid">
+
+        <!-- Full Name -->
+        <div class="form-field">
+            <label>Full Name*</label>
+            <input type="text" pInputText formControlName="fullName" #contactFullName
+                (keydown.enter)="focusNext(designation)" autofocus="false">
+            <div class="error-box">
+                @if (isInvalid('fullName')) {
+                <small class="error">Name is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Designation -->
+        <div class="form-field">
+            <label>Designation*</label>
+            <input #designation type="text" pInputText formControlName="designation"
+                (keydown.enter)="focusNext(department)">
+            <div class="error-box">
+                @if (isInvalid('designation')) {
+                <small class="error">Designation is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Department -->
+        <div class="form-field">
+            <label>Department*</label>
+            <input type="text" #department pInputText formControlName="department"
+                (keydown.enter)="focusNext(mobileNo)">
+            <div class="error-box">
+                @if (isInvalid('department')) {
+                <small class="error">Department is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Mobile No -->
+        <div class="form-field">
+            <label>Mobile No*</label>
+            <input type="number" #mobileNo pInputText formControlName="mobileNo"
+                (input)="numbersOnly($event, 'mobileNo')" (keydown.enter)="focusNext(alternateNo)" pattern="[0-16]*">
+            <div class="error-box">
+                @if (isInvalid('mobileNo')) {
+                <small class="error">Mobile Number is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Alternate No -->
+        <div class="form-field">
+            <label>Alternate No*</label>
+            <input type="number" #alternateNo pInputText formControlName="alternateNo"
+                (input)="numbersOnly($event, 'alternateNo')" (keydown.enter)="focusNext(email)" pattern="[0-9]*">
+            <div class="error-box">
+                @if (isInvalid('alternateNo')) {
+                <small class="error">Alternate Number is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-field">
+            <label>Email*</label>
+            <input type="text" #email pInputText formControlName="email" (keydown.enter)="focusNext(isDefault)">
+            <div class="error-box">
+                @if (contactForm.get('email')?.touched &&
+                contactForm.get('email')?.errors?.['required']) {
+                <small class="error">Email is required.</small>
+                }
+                @if (contactForm.get('email')?.dirty &&
+                contactForm.get('email')?.errors?.['pattern']) {
+                <small class="error">Enter a valid email like name@example.com</small>
+                }
+            </div>
+        </div>
+
+        <!-- Default Checkbox -->
+        <div class="form-field">
+            <div class="flex flex-wrap gap-2 mt-2">
+                <p-checkbox #isDefault formControlName="isDefault" binary="true" inputId="defaultCheck"
+                    (keydown.enter)="focusNext(add)">
+                </p-checkbox>
+                <label for="defaultCheck" style="margin-top: 4px;">Default</label>
+            </div>
+            <div class="error-box"></div>
+        </div>
+
+    </form>
+
+    <div class="addButton flex flex-wrap gap-4 p-5">
+        <p-button #add class="button1" label="Add" [raised]="true" (onClick)="addItem()"
+            [disabled]="contactForm.invalid" severity="info" />
+
+        <p-button class="button2" label="Clear" variant="outlined" (click)="clearForm()" severity="secondary" />
+    </div>
+</p-drawer>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

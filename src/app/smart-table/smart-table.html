@@ -1,0 +1,79 @@
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="table-header-container">
+        <p-iconField iconPosition="left" class="search-field">
+            <p-inputIcon>
+                <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input pInputText placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" />
+        </p-iconField>
+    </div>
+    <!-- TABLE BODY -->
+    <div class="table-body">
+        <p-table #dt [value]="data" [rowHover]="true" [globalFilterFields]="globalFields" [(selection)]="selectedRow"
+            selectionMode="single" dataKey="id" [scrollable]="true" scrollDirection="horizontal" scrollHeight="flex"
+            class="aura-table">
+            <!-- HEADER -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th><p-tableHeaderCheckbox [disabled]="disableSelection"></p-tableHeaderCheckbox></th>
+                    <th>#</th>
+                    @for (col of visibleColumns; track col.field) {
+                    <th [style.minWidth]="col.width">
+                        {{ col.header }}
+                    </th>
+                    }
+                    <!-- ✅ ACTION HEADER -->
+                    <th *ngIf="showActions" style="width:40px">Action</th>
+                </tr>
+            </ng-template>
+            <!-- BODY -->
+            <ng-template pTemplate="body" let-row let-i="rowIndex">
+                <tr>
+                    <td><p-tableCheckbox [value]="row" [disabled]="disableSelection"></p-tableCheckbox></td>
+                    <td>{{ i + 1 }}</td>
+                    @for (col of visibleColumns; track col.field) {
+                    <td [style.minWidth]="col.width">
+                        {{ row[col.field] }}
+                    </td>
+                    }
+                    <!-- ✅ ACTION CELL (OUTSIDE LOOP) -->
+                    <td *ngIf="showActions" class="action-cell">
+                        <button pButton icon="pi pi-ellipsis-v" class="p-button-text p-button-rounded"
+                            (click)="openActions($event, row, pop)">
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <!-- EMPTY -->
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td [attr.colspan]="visibleColumns.length + (showActions ? 3 : 2)" class="empty-msg">
+                        No Records Found
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+        <p-button icon="pi pi-plus" label="Add" variant="text" (click)="AddClicked()">
+        </p-button>
+    </div>
+</div>
+<!-- ✅ POPOVER (MUST BE HERE) -->
+<p-popover #pop [dismissable]="true">
+    <div class="action-menu">
+        @for(btn of actionBtns; track btn.text) {
+        <button pButton class="p-button-text p-button-sm" (click)="action(btn.text, selectedActionRow)">
+            <span><img [src]="btn.icon"></span>{{btn.text}}
+        </button>
+        }
+        <!-- <button pButton icon="pi pi-pencil" label="Edit" class="p-button-text p-button-sm" (click)="onEdit(pop)">
+        </button>
+        <button pButton icon="pi pi-trash" label="Delete" class="p-button-text p-button-sm p-button-danger"
+            (click)="onDelete(pop)">
+        </button> -->
+    </div>
+</p-popover>

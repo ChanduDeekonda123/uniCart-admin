@@ -1,0 +1,70 @@
+<div class="flex justify-content-center align-items-center min-h-screen bg-gray-100">
+    <p-card [style]="{ width: '420px' }" class="shadow-7 border-round-2xl surface-card">
+        <div class="text-center mb-4">
+            <i class="pi pi-user text-blue-500 text-4xl mb-3"></i>
+            <h2 class="m-0 text-2xl font-semibold text-gray-800">Welcome Back</h2>
+            <p class="text-sm text-gray-500 mt-1">Login to your account</p>
+        </div>
+        <form [formGroup]="loginForm" class=" m-6">
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <input pInputText id="email" class="w-full pt-3" formControlName="u_email" autofocus="false" autocomplete="current-password"
+                        (keydown.enter)="focusPassword(password)" />
+                    <label for="u_email" class="text-ms">Email* or Mobile*</label>
+                </p-floatlabel>
+                <!-- @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+                <small class="block p-error mt-1">
+                    @if (loginForm.get('email')?.hasError('required')) {
+                    <span>Email is required</span>
+                    } @else if (loginForm.get('email')?.hasError('email')) {
+                    <span>Please enter a valid email</span>
+                    }
+                </small>
+                } -->
+            </div>
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <p-password formControlName="u_password" id="pwd" [feedback]="false" [toggleMask]="true"
+                        inputId="password" #password (keydown.enter)="loginUser()" autocomplete="current-password"
+                        inputStyleClass="w-full pt-3"></p-password>
+                    <label for="password">Password*</label>
+                </p-floatlabel>
+                <!-- @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+                <small class="block p-error mt-1">
+                    @if (loginForm.get('password')?.hasError('required')) {
+                    <span>Password is required</span>
+                    } @else if (loginForm.get('password')?.hasError('minlength')) {
+                    <span>Password must be at least 6 characters</span>
+                    }
+                </small>
+                } -->
+            </div>
+            <div class="flex justify-content-end">
+                <!-- <button pButton label="Forgot your password?"
+                    class="p-button-link text-sm text-primary font-medium no-underline hover:text-primary-700 pr-2"
+                    routerLink="">
+                </button> -->
+                <a routerLink="../resetpwd"
+                    class="p-button-link  hover:underline text-sm text-blue-500 pb-3 font-medium no-underline">
+                    Forgot your password?
+                </a>
+            </div>
+            <p-button label="Sign In" icon="pi pi-sign-in" iconPos="right"
+                styleClass="w-full mt-3 bg-blue-500 border-none text-white hover:bg-blue-600 shadow-3 p-2 border-round-md"
+                type="submit" (click)="loginUser()" [disabled]="loginForm.invalid">
+            </p-button>
+            <div class="text-center mt-3 text-sm">
+                Not a member?
+                <a routerLink="/register"
+                    class="p-button-link  hover:underline text-sm text-blue-500 font-medium no-underline">
+                    Sign up
+                </a>
+
+            </div>
+        </form>
+    </p-card>
+    @if(isLoading){
+    <app-spinner-loader></app-spinner-loader>
+    }
+    <p-toast></p-toast>
+</div>

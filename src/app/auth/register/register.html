@@ -1,0 +1,101 @@
+<div class="flex justify-content-center align-items-center min-h-screen bg-gray-100">
+    <p-card [style]="{ width: '480px' }" class="shadow-4 border-round-lg text-base p-3">
+        <div class="text-center mb-1">
+            <i class="pi pi-user-plus text-blue-500 text-4xl mb-3"></i>
+            <h2 class="m-0 text-1xl font-bold text-gray-800">Join Our Shopping Family</h2>
+            <p class="text-sm text-gray-500 mt-1 ">Create your account and start shopping your favorite brands!</p>
+        </div>
+        <form [formGroup]="registerForm"  class="flex flex-column gap-2">
+            <div class="grid formgrid">
+                <div class="col">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="firstName" formControlName="u_firstname" (keydown.enter)="focusNext(lastname)" class="pt-3 w-12" />
+                        <label for="firstName">First Name*</label>
+                    </p-floatlabel>
+                </div>
+                <div class="col">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="lastName" formControlName="u_lastname" #lastname (keydown.enter)="focusNext(username)" class="pt-3 w-12" />
+                        <label for="lastName">Last Name*</label>
+                    </p-floatlabel>
+                </div>
+            </div>
+            <div class="grid formgrid ">
+                <div class="col">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="username" formControlName="u_username" #username (keydown.enter)="focusNext(phone)" class="pt-3 w-12" />
+                        <label for="u_username">User Name*</label>
+                    </p-floatlabel>
+                </div>
+                <div class="col">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="phone" formControlName="u_phone" #phone (keydown.enter)="focusNext(email)" class="pt-3 w-12" />
+                        <label for="phone">Phone*</label>
+                    </p-floatlabel>
+                </div>
+            </div>
+            <div class="field flex align-items-center mt-1">
+                <div class="flex-grow-1">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="email" type="email" #email (keydown.enter)="focusNext(otp)" formControlName="u_email" class="pt-3 w-full" />
+                        <label for="email">Email*</label>
+                    </p-floatlabel>
+                </div>
+                @if (showOtpTimer) {
+                <button pButton type="button" icon="pi pi-send" label="Resend OTP" class="p-button-text text-xs ml-2"
+                    [disabled]="otpTimer.timer > 0" [ngClass]="otpTimer.timer > 0 ? 'text-blue-500' : 'text-blue-600'"
+                    (click)="sentEmailOtp()">
+                </button>
+                } @else {
+                <button pButton type="button" icon="pi pi-send" label="Send OTP" class="p-button-text text-xs ml-2"
+                    [loading]="isSendingOtp" [disabled]="!getFormControls['u_email'].valid || isSendingOtp"
+                    [ngClass]="otpSent ? 'text-green-600' : 'bg-blue-500 text-white'" (click)="sentEmailOtp()">
+                </button>
+                }
+            </div>
+            @if (showOtpTimer) {
+            <p class=" text-sm text-blue-500">
+                OTP expires in {{ otpTimer.minutes }}:
+                {{ otpTimer.seconds < 10 ? '0' + otpTimer.seconds : otpTimer.seconds }} </p>
+                    }
+                    <div class="field flex align-items-center">
+                        <div class="flex-grow">
+                            <p-floatlabel variant="on">
+                                <input pInputText id="otp" formControlName="e_otp" #otp (keydown.enter)="focusPassword(password)" class="pt-3" />
+                                <label for="otp">OTP*</label>
+                            </p-floatlabel>
+                        </div>
+                        <button pButton type="button" icon="pi pi-verified"
+                            [label]="isOtpVerified ? 'Verified' : 'Verify OTP'" class="p-button-text text-xs ml-2"
+                            [loading]="isVerifyingOtp" [disabled]="!getFormControls['e_otp'].valid || isVerifyingOtp"
+                            [ngClass]="isOtpVerified ? 'text-blue' : 'bg-blue-500 text-white'"
+                            (click)="verifyEmailOtp()">
+                        </button>
+                    </div>
+                    <div class="field">
+                        <p-floatlabel variant="on" class="form-label">
+                            <p-password class="password" inputId="password" #password (keydown.enter)="focusPassword(confirmpassword)" id="pwd" formControlName="u_password"
+                                [feedback]="false" [toggleMask]="true" inputStyleClass="pt-3 " />
+                            <label for="password">Password*</label>
+                        </p-floatlabel>
+                    </div>
+                    <div class="field">
+                        <p-floatlabel variant="on">
+                            <p-password inputId="confirmPassword" formControlName="u_cnfm_password" #confirmpassword (keydown.enter)="signinUser()" [feedback]="false"
+                                [toggleMask]="true" inputStyleClass="pt-3 " />
+                            <label for="confirmPassword">Confirm Password*</label>
+                        </p-floatlabel>
+                    </div>
+                    <p-button label="Sign Up" (click)="signinUser()" icon="pi pi-sign-in" iconPos="right"
+                        styleClass="w-full  bg-blue-500 border-none text-white hover:bg-blue-600 p-3" type="submit"
+                        [disabled]="!registerForm.valid"></p-button>
+                    <div class="text-center  text-sm">
+                        Already a user?
+                        <a routerLink="/login" class="p-button-link  hover:underline text-sm text-blue-500 font-medium no-underline">Signin</a>
+                    </div>
+        </form>
+    </p-card>
+    @if(isLoading){
+    <app-spinner-loader></app-spinner-loader>
+    }
+</div>

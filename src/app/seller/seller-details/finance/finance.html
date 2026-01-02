@@ -1,0 +1,111 @@
+<form [formGroup]="financeForm" class="form-grid">
+    <!-- Account Group -->
+    <div class="form-field">
+        <label>Account Group*</label>
+        <input  #storeNameInput pInputText formControlName="accountGroup" autofocus="false" (keydown)="focusNext(slAccount)"/>
+        <div class="error-box">
+            @if (isInvalid('accountGroup')) {
+            <small class="error">Account Group is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- SL Account -->
+    <div class="form-field">
+        <label>SL Account*</label>
+        <input #slAccount pInputText formControlName="slAccount" (keydown.enter)="focusNext(taxRateSelect)" />
+        <div class="error-box">
+            @if (isInvalid('slAccount')) {
+            <small class="error">SL Account is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Tax Rate -->
+    <div class="form-field">
+        <label>Tax Rate*</label>
+        <p-select #taxRateSelect [options]="taxRates" optionValue="value" optionLabel="name" [filter]="true" filterBy="name" (keydown.enter)="openSelect(taxRateSelect)" (keydown.enter)="focusNext(paymentTerm)"
+            formControlName="taxRates"  placeholder="Select Tax">
+        </p-select>
+        <div class="error-box">
+            @if (isInvalid('taxRates')) {
+            <small class="error">Tax Rate is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Payment Term -->
+    <div class="form-field">
+        <label>Payment Term*</label>
+        <input #paymentTerm pInputText formControlName="paymentTerm" (keydown.enter)="focusNext(modeOfPayment)"/>
+        <div class="error-box">
+            @if (isInvalid('paymentTerm')) {
+            <small class="error">Payment Term is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Mode Of Payment -->
+    <div class="form-field">
+        <label>Mode Of Payment*</label>
+        <p-select #modeOfPayment [options]="paymentModes" optionLabel="name" optionValue="value" [filter]="true" filterBy="name" (keydown.enter)="openSelect(taxRateSelect)"
+        (keydown.enter)="focusNext(isCreditHold)"
+            formControlName="modeOfPayment" placeholder="Select Mode">
+        </p-select>
+        <div class="error-box">
+            @if (isInvalid('modeOfPayment')) {
+            <small class="error">Mode Of Payment is required.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Credit Hold -->
+    <div class="form-field">
+        <p-checkbox #isCreditHold formControlName="isCreditHold" binary="true" (keydown.enter)="focusNext(creditHoldAmount)"></p-checkbox>
+        <label>Credit Hold</label>
+        <div class="error-box"></div>
+    </div>
+
+    <!-- Credit Hold Amount -->
+    <div class="form-field">
+        <label>Credit Hold Amount</label>
+        <input #creditHoldAmount pInputText formControlName="creditHoldAmount" (keydown.enter)="focusNext(isOverdueHold)" />
+        <div class="error-box"></div>
+    </div>
+
+    <!-- Overdue Hold -->   
+    <div class="form-field">
+        <p-checkbox #isOverdueHold formControlName="isOverdueHold" binary="true" (keydown.enter)="focusNext(overdueDays)"></p-checkbox>
+        <label>Overdue Hold</label>
+        <div class="error-box"></div>
+    </div>
+
+    <!-- Overdue Days -->
+    <div class="form-field">
+        <label>Overdue Days</label>
+        <input #overdueDays pInputText formControlName="overdueDays" pattern="[0-9]*" (keydown.enter)="focusNext(paymentReminder)" />
+        <div class="error-box"></div>
+    </div>
+
+    <!-- Payment Reminder -->
+    <div class="form-field">
+        <p-checkbox #paymentReminder formControlName="paymentReminder" binary="true" (keydown.enter)="focusNext(creditLimit)"></p-checkbox>
+        <label>Payment Reminder</label>
+        <div class="error-box"></div>
+    </div>
+
+    <!-- Credit Limit -->
+    <div class="form-field">
+        <label>Credit Limit*</label>
+        <input #creditLimit pInputText formControlName="creditLimit" />
+        <div class="error-box">
+            @if (isInvalid('creditLimit')) {
+            <small class="error">Credit Limit is required.</small>
+            }
+        </div>
+    </div>
+</form>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

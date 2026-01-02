@@ -1,0 +1,125 @@
+<app-smart-table [columns]="myColumns" [data]="tableData" [disableSelection]="disabled" (onAdd)="openDrawer()">
+</app-smart-table>
+
+<p-drawer header="Add Bank" [(visible)]="visible2" position="right" (onShow)="focusFirstInput()">
+    <p-divider />
+
+    <form [formGroup]="bankForm" class="form-grid">
+
+        <!-- Account Holder Name -->
+        <div class="form-field">
+            <label>Account Holder Name*</label>
+            <input #accountHolderName type="text" pInputText formControlName="accountHolderName" autofocus="false" (keydown.enter)="focusNext(accountNumber)">
+            <div class="error-box">
+                @if (isInvalid('accountHolderName')) {
+                <small class="error">Account Holder Name is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Account Number -->
+        <div class="form-field">
+            <label>Account Number*</label>
+            <input #accountNumber type="number" pInputText formControlName="accountNumber"
+                (input)="numbersOnly($event, 'accountNumber')" (keydown.enter)="focusNext(confirmAccountNumber)">
+            <div class="error-box">
+                @if (isInvalid('accountNumber')) {
+                <small class="error">Account Number is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Confirm Account Number -->
+        <div class="form-field">
+            <label>Confirm Account Number*</label>
+            <input #confirmAccountNumber type="number" pInputText formControlName="confirmAccountNumber" (keydown.enter)="focusNext(bankaccountType)"
+                (input)="numbersOnly($event, 'confirmAccountNumber')">
+
+            <div class="error-box">
+                @if (isInvalid('confirmAccountNumber')) {
+                <small class="error">
+                    @if (bankForm.get('confirmAccountNumber')?.errors?.['mismatch']) {
+                    Account number does not match!
+                    } @else {
+                    Confirm Account Number is required.
+                    }
+                </small>
+                }
+            </div>
+        </div>
+        <div class="form-field">
+        <label>Account Type*</label>
+        <p-select #bankaccountType [options]="accountType" optionLabel="name" optionValue="name" [filter]="true" filterBy="name"
+            formControlName="accountType" placeholder="Select" (keydown.enter)="openSelect(bankaccountType)" (keydown.enter)="focusNext(bankName)">
+        </p-select>
+        <div class="error-box">
+            @if (isInvalid('accountType')) {
+            <small class="error">Account Type is required.</small>
+            }
+        </div>
+    </div>
+        <!-- Bank Name -->
+        <div class="form-field">
+            <label>Bank Name*</label>
+            <input #bankName type="text" pInputText formControlName="bankName" (keydown.enter)="focusNext(branchName)">
+            <div class="error-box">
+                @if (isInvalid('bankName')) {
+                <small class="error">Bank Name is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Branch Name -->
+        <div class="form-field">
+            <label>Branch Name*</label>
+            <input #branchName type="text" pInputText formControlName="branchName" (keydown.enter)="focusNext(ifscCode)">
+            <div class="error-box">
+                @if (isInvalid('branchName')) {
+                <small class="error">Branch Name is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- IFSC Code -->
+        <div class="form-field">
+            <label>IFSC Code*</label>
+            <input #ifscCode type="text" pInputText formControlName="ifscCode" (input)="bankIfscCode($event)" (keydown.enter)="focusNext(address)">
+            <div class="error-box">
+                @if (isInvalid('ifscCode')) {
+                <small class="error">IFSC Code is required.</small>
+                }
+            </div>
+        </div>
+        <!-- Address -->
+        <div class="form-field">
+            <label>Address*</label> 
+            <input #address type="text" pInputText formControlName="address" (keydown.enter)="focusNext(isDefault)">
+            <div class="error-box">
+                @if (isInvalid('address')) {
+                <small class="error">Address is required.</small>
+                }
+            </div>
+        </div>
+
+        <!-- Default Checkbox -->
+        <div class="form-field">
+            <div class="flex flex-wrap gap-2 mt-2">
+                <p-checkbox #isDefault formControlName="isDefault" binary="true" inputId="defaultCheck" >
+                </p-checkbox>
+                <label for="defaultCheck" style="margin-top:4px;">Default</label>
+            </div>
+            <div class="error-box"></div>
+        </div>
+
+    </form>
+
+    <div class="addButton flex flex-wrap gap-4">
+        <p-button class="button1" label="Add" [raised]="true" (click)="addItem()" [disabled]="bankForm.invalid"
+            severity="info" />
+        <p-button class="button2" label="Clear" variant="outlined" (click)="clearForm()" severity="secondary" />
+    </div>
+</p-drawer>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

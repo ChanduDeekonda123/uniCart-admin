@@ -1,0 +1,67 @@
+<div class="seller-layout">
+
+    <!-- TOP BAR (PRIMENG MENUBAR) -->
+    <p-menubar [model]="topMenu" class="main-topbar">
+
+        <ng-template pTemplate="start">
+            <div class="brand">
+                <i class="pi pi-shopping-cart shop-icon"></i>
+                <span class="title">Admin Panel</span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="end">
+            <div class="topbar-actions">
+
+                <!-- SEARCH BAR -->
+                <!-- <span class="p-input-icon-left search-box">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search products, orders..." />
+                </span> -->
+
+                <!-- DARK MODE TOGGLE -->
+                <!-- <p-inputSwitch [(ngModel)]="darkMode" (onChange)="toggleTheme()"></p-inputSwitch> -->
+                <!-- <p-toggleSwitch [(ngModel)]="darkMode" (onChange)="toggleTheme()"></p-toggleSwitch> -->
+
+                <!-- NOTIFICATION DROPDOWN -->
+                <p-popover #notifPanel>
+                    <h4>Notifications</h4>
+
+                    <p-scrollPanel [style]="{ height: '250px' }">
+                        <div *ngFor="let n of notifications" class="notif-item">
+                            <p>{{ n.message }}</p>
+                        </div>
+                    </p-scrollPanel>
+
+                </p-popover>
+
+                <i class="pi pi-bell bell-icon" (click)="notifPanel.toggle($event)"></i>
+
+
+                <!-- PROFILE MENU -->
+                <p-avatar label="S" Class="mr-2" shape="circle"></p-avatar>
+            </div>
+        </ng-template>
+    </p-menubar>
+
+
+    <!-- SUB HEADER (BREADCRUMB) -->
+    <!-- <p-breadcrumb [model]="breadcrumbItems" class="bread"></p-breadcrumb> -->
+
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="layout-body">
+
+        <!-- LEFT SIDEBAR (PanelMenu) -->
+        <div class="sidebar">
+            <p-panelMenu [model]="items" class="w-full side-menu"></p-panelMenu>
+        </div>
+
+
+        <!-- RIGHT CONTENT -->
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>

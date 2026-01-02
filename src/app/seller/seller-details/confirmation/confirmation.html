@@ -1,0 +1,255 @@
+<h3 class="header">
+    General Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit cursor-pointer" (click)="navigateTo('general')">
+    </span>
+    }
+</h3>
+<p-divider />
+<div class="form-grid">
+    <div class="form-field">
+        <label>Business Partner*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.generalDetails?.businessPartner || '' " />
+    </div>
+    <!-- [value]="statutory.panNo" -->
+    <div class="form-field">
+        <label>Business Partner Code*</label>
+        <input pInputText readonly class="no-border text-color "
+            [value]="sellerDetails?.generalDetails?.businessPartnerCode || '' " />
+    </div>
+    <div class="form-field">
+        <label>Actual Partner*</label>
+        <input pInputText readonly class="no-border text-color  "
+            [value]="sellerDetails?.generalDetails?.actualPartner || '' " />
+    </div>
+    <div class="form-field">
+        <label>City*</label>
+        <input pInputText readonly class="no-border text-color " [value]="sellerDetails?.generalDetails?.city || '' " />
+    </div>
+    <div class="form-field">
+        <label>Country*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.generalDetails?.country || '' " />
+    </div>
+    <div class="form-field">
+        <label>Pin Code*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.generalDetails?.pincode || '' " />
+    </div>
+    <div class="form-field">
+        <label>Currency*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.generalDetails?.currency || '' " />
+    </div>
+    <div class="form-field">
+        <label>Website</label>
+        <input pInputText readonly class="no-border text-color" />
+    </div>
+</div>
+<h3 class="header">
+    Basic Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit" (click)="navigateTo('basic')"></span>
+    }
+</h3>
+
+<p-divider />
+<div class="form-grid">
+    <div class="form-field">
+        <label>Store Name*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.storeName || ''  " />
+    </div>
+    <!-- [value]="statutory.panNo" -->
+    <div class="form-field">
+        <label>GST Number*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.gstNumber || '' " />
+    </div>
+    <div class="form-field">
+        <label>Brand Name*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.brandName || '' " />
+    </div>
+    <div class="form-field">
+        <label>Sales Rating (0–10)*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.salesRating || '' " />
+    </div>
+    <div class="form-field">
+        <label>Payment Rating (0–10)*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.paymentRating || '' " />
+    </div>
+    <div class="form-field">
+        <label>Transit Days*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.transitDays || '' " />
+    </div>
+    <div class="form-field">
+        <label>Balance*</label>
+        <input pInputText readonly class="no-border text-color" [value]="sellerDetails?.basicDetails?.balance || '' " />
+    </div>
+    <div class="form-field">
+        <label>Overdue Balance*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.basicDetails?.overDuebalance || '' " />
+    </div>
+    <div class="form-field">
+        <label>Remarks</label>
+        <input pInputText readonly class="no-border text-color" [value]="sellerDetails?.basicDetails?.remarks || '' " />
+    </div>
+</div>
+<h3 class="header">
+    Address Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit" (click)="navigateTo('address')"></span>
+    }
+</h3>
+<p-divider />
+<app-address-detail [data]="addressDetails || []" [disabled]="true"></app-address-detail>
+<h3 class="header">
+    Contact Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit" (click)="navigateTo('contact')"></span>
+    }
+</h3>
+
+<p-divider />
+<app-contact-detail [data]="contactDetails || []" [disabled]="true"></app-contact-detail>
+<h3 class="header">
+    Finance Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit" (click)="navigateTo('finance')"></span>
+    }
+</h3>
+
+<p-divider />
+<div class="form-grid">
+    <div class="form-field">
+        <label>Account Group*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.accountGroup || '' " />
+    </div>
+    <!-- [value]="statutory.panNo" -->
+    <div class="form-field">
+        <label>SL Account*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.slAccount || '' " />
+    </div>
+    <div class="form-field">
+        <label>Tax Rate*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.taxRates|| '' " />
+    </div>
+    <div class="form-field">
+        <label>Payment Term*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.paymentTerm || '' " />
+    </div>
+    <div class="form-field">
+        <label>Mode Of Payment*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.modeOfPayment || '' " />
+    </div>
+    <div class="form-field">
+        <label>Credit Hold</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.isCreditHold || '' " />
+    </div>
+    <div class="form-field">
+        <label>Credit Hold Amount</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.creditHoldAmount || '' " />
+    </div>
+    <div class="form-field">
+        <label>Overdue Hold</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.isOverdueHold || '' " />
+    </div>
+    <div class="form-field">
+        <label>Overdue Days</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.overdueDays || '' " />
+    </div>
+    <div class="form-field">
+        <label>Payment Reminder</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.paymentReminder || '' " />
+    </div>
+    <div class="form-field">
+        <label>Credit Limit*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.financeDetails?.creditLimit || '' " />
+    </div>
+</div>
+<h3 class="header">
+    Bank Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit" (click)="navigateTo('bank')"></span>
+    }
+</h3>
+
+<p-divider />
+<app-bank-detail [data]="bankDetails || []" [disabled]="true"></app-bank-detail>
+<h3 class="header">
+    Statutory Detail
+    @if (!isViewMode) {
+    <span class="pi pi-file-edit" (click)="navigateTo('statutory')"></span>
+    }
+</h3>
+
+<p-divider />
+<div class="form-grid">
+    <div class="form-field">
+        <label>Business Model*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.businessModel || '' " />
+    </div>
+    <!-- [value]="statutory.panNo" -->
+    <div class="form-field">
+        <label>Business Category*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.businessCategory || '' " />
+    </div>
+    <div class="form-field">
+        <label>Primary Product Category*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.primaryProductCategory || '' " />
+    </div>
+    <div class="form-field">
+        <label>Domestic*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.domestic || '' " />
+    </div>
+    <div class="form-field">
+        <label>PAN No*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.panNo || '' " />
+    </div>
+    <div class="form-field">
+        <label>Aadhar No*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.aadharNo || '' " />
+    </div>
+    <div class="form-field">
+        <label>MSME No*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.msmeNo || '' " />
+    </div>
+    <div class="form-field">
+        <label>PF No*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.pfNo || '' " />
+    </div>
+    <div class="form-field">
+        <label>ESI No*</label>
+        <input pInputText readonly class="no-border text-color"
+            [value]="sellerDetails?.staturtoryDetails?.esiNo || '' " />
+    </div>
+</div>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

@@ -1,0 +1,31 @@
+<!-- <p-steps [model]="items" [activeIndex]="activeIndex" class="custom-stepper" [readonly]="false"></p-steps> -->
+<div class="main">
+    <p-breadcrumb [model]="breadcrumbItems" class="bread"></p-breadcrumb>
+</div>
+@if(!isViewMode){
+<div class="card">
+    <p-steps [model]="items" styleClass="step-active custom-steps" [activeIndex]="activeIndex" class="custom-stepper"
+        [readonly]="false">
+    </p-steps>
+</div>
+}
+<router-outlet></router-outlet>
+@if(!isViewMode){
+<div class="bottomBtn" >
+    <!-- @if (showButtonsFor.includes(activeIndex)) { -->
+    @if (activeIndex > 0){
+    <p-button class="btn1" label="Back" icon="pi pi-arrow-left" variant="text" (click)="previousStep()"
+        severity="info" />
+    }
+    @if(activeIndex !== 7){
+    <p-button label="Clear" variant="outlined" (click)="clearAll()" severity="secondary"></p-button>
+    <p-button label="Save" variant="outlined" severity="secondary" (click)="save()"></p-button>
+    <p-button label="Next" [disabled]="sellerCode === null" [raised]="true" severity="info"
+        (click)="nextStep()"></p-button>
+    }
+    @if(activeIndex === 7){
+    <p-button label="Send For Approval" [raised]="true" severity="info" (click)="sendForApproval()"></p-button>
+    }
+</div>
+}
+<!-- <app-general-detail (formStatusChange)="onGeneralFormChange($event)"></app-general-detail> -->

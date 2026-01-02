@@ -1,0 +1,31 @@
+export const END_POINT_URL = {
+    SEND_EMAIL_OTP : '/email/sendOtp',
+    VERIFY_EMAIL_OTP: '/email/verify-otp',
+    SEQUENCE_CODE:'/seller/getSequenceCode',
+    SIGNUP_USER: '/user/signup',
+    LOGIN_USER: '/user/login',
+    CHECK_USERNAME_AVAILABILTY: '/user/checkUsernameAvailability',
+    SAVE_PRODUCT: '/product/addProduct',
+    GET_PRODUCTS: '/product/getProducts',
+    UPDATE_PRODUCT: '/product/updateProduct',
+    DELETE_PRODUCT: '/product/deleteProduct',
+    GET_PRODUCTS_CATEGORY_LIST: '/category/getCategoryList',
+    GET_PRODUCT_BY_ID: '/product/getProducts',
+    RESET_PASSWORD:'/user/reset-password',
+    GET_USER:'/user/getUserByUserId',
+    UPDATE_USER: '/user/updateUser',
+    GETUPDATE_ADDRESS:'/userAddress/getUserAddress',
+    SAVEUPDATE_ADDRESS:'/userAddress/saveUserAddress',
+    UPDATE_ADDRESS:'/userAddress/updateUserAddress',
+    DELETE_ADDRESS:'/userAddress/deleteUserAddress',
+
+    //seller
+    SAVE_GENERALDETAILS: '/seller/draft',
+    SHOW_SELLERLIST:'/seller/getSellerList',
+    DELETE_SELLERLIST:'/seller/deleteSeller',
+    UPDATE_SELLERDETAILS:'/seller/updateSeller ',
+    GETSELLERBY_CODE:'/seller/getSellerByCode',
+    SENDFOR_APPROVEL:'/seller/sendForApproval',
+    REJECTAPPROVE_SELLER:'/seller/approveRejectSeller',
+    GETSELLER_COUNT:'/seller/getSellerCount'
+}

@@ -1,0 +1,99 @@
+<form [formGroup]="basicForm" class="form-grid">
+    <!-- Store Name -->
+    <div class="form-field">
+        <label>Store Name*</label>
+        <input #storeNameInput pInputText formControlName="storeName" (keydown.enter)="focusNext(gstNumber)" />
+        <div class="error-box">
+            @if (isInvalid('storeName')) {
+                <small class="error">Enter store name.</small>
+            }
+        </div>
+    </div>
+    <!-- GST Number -->
+    <div class="form-field">
+        <label>GST Number*</label>
+        <input #gstNumber pInputText formControlName="gstNumber" (keydown.enter)="focusNext(brandName)" (input)="ongstNumber($event)" />
+        <div class="error-box">
+            @if (isInvalid('gstNumber')) {
+                <small class="error">Enter a valid GST Number.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Brand Name -->
+    <div class="form-field">
+        <label>Brand Name*</label>
+        <input #brandName pInputText formControlName="brandName" (keydown.enter)="focusNext(salesRating)" />
+        <div class="error-box">
+            @if (isInvalid('brandName')) {
+                <small class="error">Enter brand name.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Sales Rating -->
+    <div class="form-field">
+        <label>Sales Rating (0–10)*</label>
+        <input #salesRating pInputText formControlName="salesRating" min="0" max="10" (keydown.enter)="focusNext(paymentRating)" />
+        <div class="error-box">
+            @if (isInvalid('salesRating')) {
+                <small class="error">Enter a rating between 0 and 10.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Payment Rating -->
+    <div class="form-field">
+        <label>Payment Rating (0–10)*</label>
+        <input #paymentRating pInputText formControlName="paymentRating" min="0" max="10" (keydown.enter)="focusNext(transitDays)"/>
+        <div class="error-box">
+            @if (isInvalid('paymentRating')) {
+                <small class="error">Enter a rating between 0 and 10.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Transit Days -->
+    <div class="form-field">
+        <label>Transit Days*</label>
+        <input #transitDays pInputText formControlName="transitDays" (keydown.enter)="focusNext(balance)"/>
+        <div class="error-box">
+            @if (isInvalid('transitDays')) {
+                <small class="error">Enter transit days.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Balance -->
+    <div class="form-field">
+        <label>Balance*</label>
+        <input #balance pInputText type="number" formControlName="balance" (keydown.enter)="focusNext(overDuebalance)"/>
+        <div class="error-box">
+            @if (isInvalid('balance')) {
+                <small class="error">Enter balance.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Overdue Balance -->
+    <div class="form-field">
+        <label>Overdue Balance*</label>
+        <input #overDuebalance pInputText type="number" formControlName="overDuebalance" (keydown.enter)="focusNext(remarks)"/>
+        <div class="error-box">
+            @if (isInvalid('overDuebalance')) {
+                <small class="error">Enter overdue balance.</small>
+            }
+        </div>
+    </div>
+
+    <!-- Remarks -->
+    <div class="form-field">
+        <label>Remarks</label>
+        <textarea #remarks rows="5" cols="30" pTextarea formControlName="remarks"></textarea>
+        <div class="error-box"></div> <!-- To keep alignment -->
+    </div>
+</form>
+@if(isLoading){
+<app-spinner-loader></app-spinner-loader>
+}
+<p-toast></p-toast>

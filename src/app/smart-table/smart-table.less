@@ -1,0 +1,234 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 45vh;
+  background: #fff;
+  border-radius: 11px;
+  margin: 30px 40px 0 74px !important;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.table-header-container {
+  padding: 10px;
+  flex-shrink: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+
+.table-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.empty-msg {
+  text-align: center;
+  // padding: 68px;
+  height: auto !important;
+}
+
+.empty-box {
+  text-align: center;
+  color: #666;
+}
+.p-button-sm {
+    font-size: 16px !important;
+    padding: var(--p-button-sm-padding-y) var(--p-button-sm-padding-x);
+}
+.p-button-label {
+    font-weight: 500!important;
+}
+.table-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.p-inputtext {
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-size: 1rem;
+    color: var(--p-inputtext-color);
+    background: var(--p-inputtext-background);
+    padding-block: var(--p-inputtext-padding-y);
+    padding-inline: var(--p-inputtext-padding-x);
+    border: 1px solid var(--p-inputtext-border-color);
+    transition: background var(--p-inputtext-transition-duration), color var(--p-inputtext-transition-duration), border-color var(--p-inputtext-transition-duration), outline-color var(--p-inputtext-transition-duration), box-shadow var(--p-inputtext-transition-duration);
+    appearance: none;
+    border-radius: var(--p-inputtext-border-radius);
+    outline-color: transparent;
+    box-shadow: var(--p-inputtext-shadow);
+    width: 1102px !important;
+    border-radius: 10px 10px 0px 0px!important;
+}
+// .smart-table-container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 60%; /* FIXED HEIGHT */
+//   max-height: 60vh; /* PREVENT GROWTH */
+//   overflow: hidden; /* PREVENT TABLE EXPANDING */
+//   background: #fff;
+//   border-radius: 10px;
+//   margin: 30px 40px 0px 74px !important ;
+//   border: 1px solid #ddd;
+//   padding: 10px;
+// }
+
+/* Search bar */
+.table-header {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Sticky header */
+:host ::ng-deep .smart-table .p-datatable-scrollable-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 10;
+  background: #fff !important;
+}
+
+/* Body scrolls */
+// :host ::ng-deep .p-datatable-scrollable-body {
+//   overflow-y: auto !important;
+//   max-height: calc(50vh - 70px) !important; /* header + padding height deducted */
+// }
+
+/* Header style */
+:host ::ng-deep .smart-table thead th {
+  font-weight: 600;
+  background: #f8f9fa !important;
+  padding: 10px;
+}
+
+/* Row hover */
+:host ::ng-deep .smart-table tbody tr:hover {
+  background-color: #f1f5f9;
+  cursor: pointer;
+}
+/* TABLE WRAPPER MUST NOT SCROLL */
+:host ::ng-deep .p-datatable {
+  overflow: hidden !important;
+}
+
+/* HEADER MUST STAY FIXED */
+:host ::ng-deep .p-datatable-scrollable-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 20 !important;
+  background: #fff !important;
+  overflow: visible !important;
+}
+
+/* ONLY BODY SCROLLS */
+:host ::ng-deep .p-datatable-scrollable-body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: 100% !important;
+}
+
+
+// .bottom-bar {
+//   display: flex;
+//   justify-content: flex-start;
+//   gap: 10px;
+//   padding: 10px 0 0 0;
+//   border-top: 1px solid #eee;
+//   position: sticky;
+//   bottom: 0;
+//   background: #fff;
+// }
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 60%;                  /* FIX TABLE HEIGHT */
+//   background: #fff;
+//   border-radius: 11px;
+//   margin: 30px 40px 0 74px !important;
+//   border: 1px solid #ddd;
+//   overflow: hidden;              /* PREVENT CONTAINER GROW */
+// }
+
+// .table-header-container {
+//   display: flex;
+//   justify-content: flex-start;
+//   padding: 10px;
+//   background: #fff;
+//   z-index: 10;
+// }
+
+// .table-content {
+//   flex: 1;
+//   overflow-y: auto;              /* SCROLL ONLY BODY */
+//   overflow-x: hidden;
+//   position: relative;
+// }
+
+// /* FIX: Sticky header inside table */
+// :host ::ng-deep .p-datatable-scrollable-header {
+//   position: sticky !important;
+//   top: 0;
+//   z-index: 20 !important;
+//   background: #fff !important;
+// }
+
+// /* Scroll body only */
+// :host ::ng-deep .p-datatable-scrollable-body {
+//   overflow-y: auto !important;
+//   max-height: calc(60vh - 120px) !important; /* Header + search + bottom bar */
+// }
+
+// /* Optional row style */
+// :host ::ng-deep .p-datatable tbody tr:hover {
+//   background: #f5f5f5;
+// }
+
+// /* Input styling (keep your style) */
+// .p-inputtext {
+//     width: 1255px !important;
+//     border-radius: 10px 10px 0 0 !important;
+// }
+// .p-datatable-thead > tr > th {
+//   padding: var(--p-datatable-header-cell-padding);
+//   background: #e7e7e7 !important;
+//   border-color: var(--p-datatable-header-cell-border-color);
+//   border-style: solid;
+//   border-width: 0 0 1px 0;
+//   position: sticky !important;
+//   top: 0;
+//   z-index: 10;
+//   color: #334155 !important;
+//   font-weight: var(--p-datatable-column-title-font-weight);
+//   text-align: start;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+//   transition: background var(--p-datatable-transition-duration),
+//     color var(--p-datatable-transition-duration),
+//     border-color var(--p-datatable-transition-duration),
+//     outline-color var(--p-datatable-transition-duration),
+//     // box-shadow var(--p-datatable-transition-duration);;
+// }
+// .table-header-container {
+//   padding: 0px !important;
+// }
+// // .bottom-bar {
+// //   display: flex;
+// //   justify-content: flex-start;
+// //   gap: 10px;
+// //   padding: 10px !important;
+// //   border-top: 1px solid #eee;
+// //   position: sticky;
+// //   bottom: 0;
+// //   background: #fff;
+// //   border-radius: 0px 0px 11px 11px !important;
+// // }
+
+// .emptymessage{
+//   text-align: center;
+//   padding: 100px !important;
+// }
+
+img{
+  width: 10px;
+  height: 10px;
+}

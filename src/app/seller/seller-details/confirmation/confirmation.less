@@ -1,0 +1,121 @@
+.confirm-wrapper {
+  margin: 15px;
+}
+
+.form-box {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #fff;
+}
+
+.form-box h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.col {
+  flex: 1;
+  padding-right: 15px;
+}
+
+.col p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+strong {
+  color: #444;
+}
+.no-border {
+  border: none !important;
+  box-shadow: none !important; /* Remove PrimeNG shadow */
+  background: transparent !important; /* Optional */
+  padding-left: 0 !important; /* Makes it look like plain text */
+  pointer-events: none; /* Prevents clicking */
+}
+.header {
+  margin-left: 72px;
+  color: #334155;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3 columns */
+  gap: 30px 90px; /* Row gap, Column gap */
+  width: 90%;
+  margin-top: 25px;
+  padding-left: 76px;
+}
+
+/* Each input block */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px !important;
+}
+
+/* Label */
+.form-field label {
+  font-size: 15px;
+  font-weight: 500 !important;
+  color: #64748B;
+}
+
+/* Input Style */
+.form-field input[pInputText],
+.form-field .p-inputtext {
+  height: 40px;
+  // border-radius: 8px !important;
+  // border: 1px solid #cfd4d9 !important;
+  // padding: 8px 10px !important;
+  // font-size: 14px !important;
+}
+
+/* Calendar control behaves same */
+// .form-field .p-calendar .p-inputtext {
+//   height: 20px !important;
+//   border-radius: 8px !important;
+// }
+/* Responsive: 1 column on mobile */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+:host ::ng-deep .bottom-bar{
+  display: none !important;
+}
+:host ::ng-deep .empty-msg {
+  text-align: center;
+  padding: 10px!important;
+}
+:host ::ng-deep .p-inputtext{
+  width: 1088px !important;
+}
+.header{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin-right: 20px;
+
+  span{
+    font-size: 18px;
+    cursor: pointer;
+  }
+}
+.text-color{
+  color: #334155 !important;
+  font-size: 16px!important;
+  font-weight: bold;
+
+}

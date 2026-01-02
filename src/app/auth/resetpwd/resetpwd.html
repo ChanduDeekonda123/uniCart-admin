@@ -1,0 +1,87 @@
+<div class="flex justify-content-center align-items-center min-h-screen bg-gray-100">
+    <p-card [style]="{ width: '480px' }" class="shadow-4 border-round-lg text-base p-4">
+        <div class="text-center mb-3">
+            <i class="pi pi-lock text-blue-500 text-4xl mb-2"></i>
+            <h2 class="m-0 text-xl font-bold text-gray-800">Reset Your Password</h2>
+            <p class="text-sm text-gray-500 mt-1">
+                Enter your registered email to receive OTP and reset your password
+            </p>
+        </div>
+
+        <form [formGroup]="resetForm" (ngSubmit)="resetPassword()" class="flex flex-column gap-3">
+
+            <div class="field flex align-items-center">
+                <div class="flex-grow-1">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="email" type="email" formControlName="u_email" class="pt-3 w-full" />
+                        <label for="email">Email*</label>
+                    </p-floatlabel>
+                </div>
+
+                @if (showOtpTimer) {
+                <button pButton type="button" icon="pi pi-send" label="Resend OTP" class="p-button-text text-xs ml-2"
+                    [disabled]="otpTimer.timer > 0"
+                    [ngClass]="{ 'text-gray-400': otpTimer.timer > 0, 'text-green-600': otpTimer.timer <= 0 }"
+                    (click)="sendOtp()"></button>
+                } @else {
+                <button pButton type="button" icon="pi pi-send" label="Send OTP" class="p-button-text text-xs ml-2"
+                    [loading]="isSendingOtp" [disabled]="!getFormControls['u_email'].valid || isSendingOtp"
+                    [ngClass]="{ 'text-blue-600': otpSent, 'bg-blue-500 text-white': !otpSent }"
+                    (click)="sendOtp()"></button>
+                }
+            </div>
+
+            @if (showOtpTimer) {
+            <p class="text-sm text-green-500">
+                OTP expires in
+                {{ otpTimer.minutes }}:
+                {{ otpTimer.seconds < 10 ? '0' + otpTimer.seconds : otpTimer.seconds }} </p>
+                    }
+
+                    <div class="field flex align-items-center">
+                        <div class="flex-grow ">
+                            <p-floatlabel variant="on">
+                                <input pInputText id="otp" formControlName="otp" class="pt-3" />
+                                <label for="otp">OTP*</label>
+                            </p-floatlabel>
+                        </div>
+
+                        <button pButton type="button" icon="pi pi-verified"
+                            [label]="isOtpVerified ? 'Verified' : 'Verify OTP'" class="p-button-text text-xs ml-2"
+                            [loading]="isVerifyingOtp" [disabled]="!getFormControls['otp'].valid || isVerifyingOtp"
+                            [ngClass]="{ 'text-blue-500': isOtpVerified, 'bg-blue-500 text-white': !isOtpVerified }"
+                            (click)="verifyOtp()"></button>
+                    </div>
+
+                    <div class="field">
+                        <p-floatlabel variant="on">
+                            <p-password inputId="newPassword" formControlName="u_password" [feedback]="false"
+                                [toggleMask]="true" inputStyleClass="pt-3 w-full"></p-password>
+                            <label for="newPassword">New Password*</label>
+                        </p-floatlabel>
+                    </div>
+
+                    <div class="field">
+                        <p-floatlabel variant="on">
+                            <p-password inputId="confirmPassword" formControlName="confirm_password" [feedback]="false"
+                                [toggleMask]="true" inputStyleClass="pt-3 w-full"></p-password>
+                            <label for="confirmPassword">Confirm Password*</label>
+                        </p-floatlabel>
+                    </div>
+
+                    <p-button label="Reset Password" icon="pi pi-refresh" iconPos="right"
+                        styleClass="w-full bg-blue-500 border-none text-white hover:bg-blue-600 p-3" type="submit"
+                        [disabled]="!resetForm.valid || !isOtpVerified"></p-button>
+
+                    <div class="text-center text-sm mt-3">
+                        Remember your password?
+                        <a routerLink="/login"
+                            class="p-button-link hover:underline text-sm text-blue-500 font-medium no-underline">Login</a>
+                    </div>
+        </form>
+    </p-card>
+
+    @if (isLoading) {
+    <app-spinner-loader></app-spinner-loader>
+    }
+</div>
