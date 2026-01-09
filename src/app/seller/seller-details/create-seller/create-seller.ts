@@ -40,9 +40,11 @@ export class CreateSeller implements OnInit {
 	) {
 		effect(() => {
 			const value = this.sellerService.actionSignal();
-			value === 'generalDetailsSaved' && (this.sellerCode = this.sellerService.businessPartnerCode);
-			// value === 'clear-general' && this.clearForm();
-		})
+			const code = this.sellerService.businessPartnerCode
+			if (value === 'generalDetailsSaved' && code) {
+				this.sellerCode = code;
+			}
+		});
 	}
 	ngOnInit(): void {
 		this.items = [
@@ -106,9 +108,9 @@ export class CreateSeller implements OnInit {
 
 	save() {
 		this.sellerService.actionSignal.set(`save-${stepperUrls[this.activeIndex]}`)
-		this.sellerCode = this.sellerService.businessPartnerCode
+		// this.sellerCode = this.sellerService.businessPartnerCode
 	}
-	sendForApproval(){
+	sendForApproval() {
 		this.sellerService.actionSignal.set('send-approval');
 	}
 	nextStep() {
@@ -127,7 +129,7 @@ export class CreateSeller implements OnInit {
 			});
 		}
 	}
-	
+
 	clearAll() {
 		this.sellerService.actionSignal.set(`clear-${stepperUrls[this.activeIndex]}`)
 	}

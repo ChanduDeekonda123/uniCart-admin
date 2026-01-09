@@ -6,21 +6,16 @@ import { environment } from '../../../Environment/enviroment';
   providedIn: 'root'
 })
 export class HttpService {
-
   mainUrl: any = environment?.apiBaseUrl;
   constructor(private httpClint: HttpClient) {
-
   }
-
   getCompleteUrl(url: any) {
     return this.mainUrl + url;
   }
-
   getMethod(endPoint: any) {
     const url = this.getCompleteUrl(endPoint);
     return this.httpClint.get(url);
   }
-
   postMethod(endPoint: any, payload: any) {
     const url = this.getCompleteUrl(endPoint);
     return this.httpClint.post(url, payload).pipe(
@@ -30,7 +25,6 @@ export class HttpService {
       })
     );
   }
-
   putMethod(endPoint:any, payload:any) {
     const url = this.getCompleteUrl(endPoint);
     return this.httpClint.put(url, payload)
@@ -48,6 +42,7 @@ export class HttpService {
     })
   );
 }
-
-
 }
+
+
+//this file helps to call apis like get,post,put,delete

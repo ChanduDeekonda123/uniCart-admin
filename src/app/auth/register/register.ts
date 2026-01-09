@@ -210,7 +210,6 @@ export class Register implements OnInit, AfterViewInit {
     this.showOtpTimer = true;
     clearInterval(this.otpTimeInterval);
     this.otpTimer.timer = 180;
-
     this.otpTimeInterval = setInterval(() => {
       if (this.otpTimer.timer > 0) {
         this.otpTimer.timer--;

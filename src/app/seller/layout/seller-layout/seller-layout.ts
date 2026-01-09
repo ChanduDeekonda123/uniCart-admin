@@ -40,22 +40,17 @@ export class SellerLayout {
 
   // Top Menu
   topMenu = [];
-
   // Breadcrumb
   // breadcrumbItems = [{ label: 'Seller' }, { label: 'Dashboard' }];
 
   // Notifications
   notifications = [
-  { message: 'Product approved', type: 'APPROVED', color: 'success' },  
+  { message: 'Product approved', type: 'APPROVED', color: 'success' },
   { message: 'Low stock warning', type: 'STOCK', color: 'warn' },
   { message: 'Order shipped', type: 'ORDER', color: 'info' },
   { message: 'New message', type: 'MESSAGE', color: 'secondary' },
 ];
-
-
-  // Details for sidebar menu
-  items: MenuItem[] = [];
-
+items: MenuItem[] = [];
 ngOnInit() {
   this.items = [
     {
@@ -127,22 +122,16 @@ ngOnInit() {
     }
   ];
 }
-
-  darkMode = false;
-
-  toggleTheme() {
-    console.log('Toggle Dark Mode');
-  }
-
-  breadcrumbItems = [{ label: 'Seller' }, { label: 'Dashboard' }];
+  // toggleTheme() {
+  //   console.log('Toggle Dark Mode');
+  // }
+  // breadcrumbItems = [{ label: 'Seller' }, { label: 'Dashboard' }];
   navigate(path: string) {
     this.router.navigate([path]);
   }
-
   addBusiness() {
     this.router.navigate(['seller/seller-details/create-seller/general'])
   }
-
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);

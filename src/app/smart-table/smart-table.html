@@ -1,6 +1,4 @@
 <div class="container">
-
-    <!-- HEADER -->
     <div class="table-header-container">
         <p-iconField iconPosition="left" class="search-field">
             <p-inputIcon>
@@ -9,12 +7,10 @@
             <input pInputText placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" />
         </p-iconField>
     </div>
-    <!-- TABLE BODY -->
     <div class="table-body">
         <p-table #dt [value]="data" [rowHover]="true" [globalFilterFields]="globalFields" [(selection)]="selectedRow"
             selectionMode="single" dataKey="id" [scrollable]="true" scrollDirection="horizontal" scrollHeight="flex"
             class="aura-table">
-            <!-- HEADER -->
             <ng-template pTemplate="header">
                 <tr>
                     <th><p-tableHeaderCheckbox [disabled]="disableSelection"></p-tableHeaderCheckbox></th>
@@ -24,11 +20,11 @@
                         {{ col.header }}
                     </th>
                     }
-                    <!-- ✅ ACTION HEADER -->
-                    <th *ngIf="showActions" style="width:40px">Action</th>
+                    @if(showActions){
+                        <th style="width:40px">Action</th>
+                    }
                 </tr>
             </ng-template>
-            <!-- BODY -->
             <ng-template pTemplate="body" let-row let-i="rowIndex">
                 <tr>
                     <td><p-tableCheckbox [value]="row" [disabled]="disableSelection"></p-tableCheckbox></td>
@@ -38,15 +34,15 @@
                         {{ row[col.field] }}
                     </td>
                     }
-                    <!-- ✅ ACTION CELL (OUTSIDE LOOP) -->
-                    <td *ngIf="showActions" class="action-cell">
-                        <button pButton icon="pi pi-ellipsis-v" class="p-button-text p-button-rounded"
+                    @if(showActions){
+                        <td class="action-cell">
+                            <button pButton icon="pi pi-ellipsis-v" class="p-button-text p-button-rounded"
                             (click)="openActions($event, row, pop)">
                         </button>
-                    </td>
+                        </td>
+                    }
                 </tr>
             </ng-template>
-            <!-- EMPTY -->
             <ng-template pTemplate="emptymessage">
                 <tr>
                     <td [attr.colspan]="visibleColumns.length + (showActions ? 3 : 2)" class="empty-msg">
@@ -56,13 +52,11 @@
             </ng-template>
         </p-table>
     </div>
-    <!-- BOTTOM BAR -->
     <div class="bottom-bar">
         <p-button icon="pi pi-plus" label="Add" variant="text" (click)="AddClicked()">
         </p-button>
     </div>
 </div>
-<!-- ✅ POPOVER (MUST BE HERE) -->
 <p-popover #pop [dismissable]="true">
     <div class="action-menu">
         @for(btn of actionBtns; track btn.text) {

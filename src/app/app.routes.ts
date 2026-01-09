@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
-
 import { Login } from './auth/login/login';
 import { Register } from './auth/register/register';
 import { Resetpwd } from './auth/resetpwd/resetpwd';
-
-// Seller Components
 import { Dashboard } from './seller/dashboard/dashboard';
 import { SellerLayout } from './seller/layout/seller-layout/seller-layout';
 import { AddProduct } from './seller/products/add-product/add-product';
@@ -17,13 +14,8 @@ import { Inventory } from './seller/inventory/inventory';
 import { OrderDetails } from './seller/orders/order-details/order-details';
 import { OrderList } from './seller/orders/order-list/order-list';
 import { Support } from './seller/support/support';
-
-// Seller Details (New Onboarding Stepper)
 import { SellerList } from './seller/seller-details/seller-list/seller-list';
 import { CreateSeller } from './seller/seller-details/create-seller/create-seller';
-
-
-// Admin Components
 import { AdminDashboard } from './admin/admin-dashboard/admin-dashboard';
 import { AdminLayout } from './admin/admin-layout/admin-layout';
 import { Orders } from './admin/orders/orders';
@@ -40,28 +32,16 @@ import { Confirmation } from './seller/seller-details/confirmation/confirmation'
 import { SmartTable } from './smart-table/smart-table';
 import { Finance } from './seller/seller-details/finance/finance';
 import { Notifications } from './service/notification/notifications';
-
-
 export const routes: Routes = [
-
-    // =========================
-    // AUTH ROUTES
-    // =========================
     { path: 'login', component: Login },
     { path: 'register', component: Register },
     { path: 'resetpwd', component: Resetpwd },
     { path: 'smarttable', component: SmartTable},
-
-    // =========================
-    // SELLER ROUTES
-    // =========================
     {
         path: 'seller',
         component: SellerLayout,
         children: [
-
             { path: '', component: Dashboard },
-
             {
                 path: 'products',
                 children: [
@@ -80,7 +60,6 @@ export const routes: Routes = [
             { path: 'profile', component: Profile },
             { path: 'support', component: Support },
             { path: 'notifications', component: Notifications },
-            // { path:'create-seller', component:CreateSeller},
             {
                 path: 'seller-details',
                 children: [
@@ -105,10 +84,6 @@ export const routes: Routes = [
             }
         ]
     },
-
-    // =========================
-    // ADMIN ROUTES
-    // =========================
     {
         path: 'admin',
         component: AdminLayout,
@@ -121,11 +96,6 @@ export const routes: Routes = [
             { path: 'orders', component: Orders }
         ]
     },
-
-    // =========================
-    // DEFAULT REDIRECT
-    // =========================
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', redirectTo: 'login' }
-
 ];

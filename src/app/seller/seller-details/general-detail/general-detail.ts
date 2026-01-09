@@ -169,6 +169,7 @@ export class GeneralDetail implements OnInit {
     //   generalDetails: this.generalForm.getRawValue()
     // };
     this.isLoading = true;
+    this.sellerService.actionSignal.set('');
     this.sellerService.saveGeneralDetails(reqPayLoad).subscribe({
       next: (res: any) => {
         if (res?.status === 'success') {
@@ -182,7 +183,7 @@ export class GeneralDetail implements OnInit {
           this.sellerDetails = res?.data;
           this.sellerService.actionSignal.set('generalDetailsSaved')
           // this.sellerService.sellerAdded.set(res.data);
-          this.sellerService.actionSignal.set('');
+          // this.sellerService.actionSignal.set('');
         } else {
           this.notificationService.showError(res?.message);
         }

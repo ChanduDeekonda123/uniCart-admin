@@ -28,9 +28,11 @@
                     <h4>Notifications</h4>
 
                     <p-scrollPanel [style]="{ height: '250px' }">
-                        <div *ngFor="let n of notifications" class="notif-item">
-                            <p>{{ n.message }}</p>
-                        </div>
+                        @for(n of notifications; track n){
+                            <div class="notif-item">
+                                <p>{{n.message}}</p>
+                            </div>
+                        }
                     </p-scrollPanel>
 
                 </p-popover>

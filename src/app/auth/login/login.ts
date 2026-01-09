@@ -12,8 +12,8 @@ import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
 import { CommonApi } from '../../service/common-api/common-api';
 import { Config } from '../../service/config/config';
-import { SpinnerLoader } from '../../spinner-loader/spinner-loader';
 import { Notifications } from '../../service/notification/notifications';
+import { SpinnerLoader } from '../../spinner-loader/spinner-loader';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -55,12 +55,10 @@ export class Login implements OnInit {
       u_password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-
   focusPassword(field:any) {
       field?.input?.nativeElement.focus();
       // this.passwordInput?.nativeElement.focus();
     }
-    
   loginUser() {
     if (this.loginForm.invalid) {
       this.notificationService.showError('Please enter valid credentials.');
@@ -71,7 +69,6 @@ export class Login implements OnInit {
       identifier: this.loginForm.get('u_email')?.value,
       u_password: btoa(this.loginForm.get('u_password')?.value),
     };
-
     this.commonService.loginUser(requestPayload).subscribe(
       (res: any) => {
         if (res?.status === 'success') {
@@ -95,5 +92,4 @@ export class Login implements OnInit {
       }
     );
   }
-
 }

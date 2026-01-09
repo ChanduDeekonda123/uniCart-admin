@@ -14,11 +14,11 @@ import { SelectModule } from 'primeng/select';
 import { StepperModule } from 'primeng/stepper';
 import { TableModule } from 'primeng/table';
 import { TabsModule } from 'primeng/tabs';
+import { ToastModule } from 'primeng/toast';
 import { Seller } from '../../../service/seller/seller';
 import { SmartTable } from '../../../smart-table/smart-table';
-import { actionBtns, actionsKeys, listParams } from '../seller.config';
 import { SpinnerLoader } from '../../../spinner-loader/spinner-loader';
-import { ToastModule } from 'primeng/toast';
+import { actionBtns, actionsKeys, listParams, sellerFields } from '../seller.config';
 interface City {
   name: string;
   code: string;
@@ -62,6 +62,7 @@ export class SellerList implements OnInit {
   isLoading: any;
   op: any;
   activeTabIndex = 0;
+  fields = sellerFields
   cities: City[] | undefined;
   selectedCity: City | undefined;
   selectAll: boolean = false;
@@ -75,7 +76,9 @@ export class SellerList implements OnInit {
   pendingCount: number = 0;
   approvelCount: number = 0;
   rejectedCount: number = 0;
-  constructor(private router: Router, private sellerService: Seller) {
+  constructor(private router: Router, private sellerService: Seller,
+    private configService: Seller
+  ) {
     effect(() => {
       const newSeller = this.sellerService.sellerAdded();
       if (newSeller) {
@@ -109,7 +112,7 @@ export class SellerList implements OnInit {
     this.smartTable.filterTable(event.target.value);
   }
   getColumns() {
-    this.tableColumns = this.fields.map((f, index) => ({
+    this.tableColumns = this.fields.map((f:any, index:number) => ({
       field: f.value,
       header: f.label,
       isCheck: f.isCheck,
@@ -243,51 +246,13 @@ export class SellerList implements OnInit {
   //     this.sellerProfile.status = "Rejected";
   //   }
   // }
-  fields = [
-    { label: 'Business Partner', value: 'businessPartner', isCheck: true },
-    { label: 'Business Partner Code', value: 'businessPartnerCode', isCheck: true, },
-    { label: 'Created On', value: 'createdOn', isCheck: true, },
-    { label: 'City', value: 'city', isCheck: true, },
-    { label: 'State', value: 'state', isCheck: true, },
-    { label: 'Country', value: 'country', isCheck: false, },
-    { label: 'Pin Code', value: 'pincode', isCheck: false },
-    { label: 'Currency', value: 'currency', isCheck: false },
-    { label: 'Record Status', value: 'recordStatus', isCheck: false },
-    { label: 'Store Name', value: 'storeName', isCheck: false },
-    { label: 'GST Number', value: 'gstNumber', isCheck: false },
-    { label: 'Brand Name', value: 'brandName', isCheck: false },
-    { label: 'Sales Rating', value: 'salesRating', isCheck: false },
-    { label: 'Payment Rating', value: 'paymentRating', isCheck: false },
-    { label: 'Transit Days', value: 'transitDays', isCheck: false },
-    { label: 'Balance', value: 'balance', isCheck: false },
-    { label: 'Over due', value: 'overDuebalance', isCheck: false },
-    { label: 'Account group', value: 'accountGroup', isCheck: false },
-    { label: 'SL Account', value: 'slAccount', isCheck: false },
-    { label: 'Tax Rate', value: 'taxRates', isCheck: false },
-    { label: 'Payment Term', value: 'paymentTerm', isCheck: false },
-    { label: 'Mode Of Payment', value: 'modeOfPayment', isCheck: false },
-    { label: 'Overdue Days', value: 'overdueDays', isCheck: false },
-    { label: 'Credit Limit', value: 'creditLimit', isCheck: false },
-    { label: 'Credit Hold Amount', value: 'creditHoldAmount', isCheck: false },
-    { label: 'Credit Hold', value: 'isCreditHold', isCheck: false },
-    { label: 'Overdue Hold', value: 'isOverdueHold', isCheck: false },
-    { label: 'Payment Reminder', value: 'paymentReminder', isCheck: false },
-    { label: 'Business Model', value: 'businessModel', isCheck: false },
-    { label: 'Business Category', value: 'businessCategory', isCheck: false },
-    { label: 'Primary Product Category', value: 'primaryProductCategory', isCheck: false },
-    { label: 'Domestic', value: 'domestic', isCheck: false },
-    { label: 'PAN No', value: 'panNo', isCheck: false },
-    { label: 'Aadhar No', value: 'aadharNo', isCheck: false },
-    { label: 'MSME No', value: 'msmeNo', isCheck: false },
-    { label: 'PF No', value: 'pfNo', isCheck: false },
-    { label: 'ESI No', value: 'esiNo', isCheck: false },
-  ];
-  notifications = [
-    { message: 'Product approved', type: 'APPROVED', color: 'success' },
-    { message: 'Low stock warning', type: 'STOCK', color: 'warn' },
-    { message: 'Order shipped', type: 'ORDER', color: 'info' },
-    { message: 'New message', type: 'MESSAGE', color: 'secondary' },
-  ];
+
+  // notifications = [
+  //   { message: 'Product approved', type: 'APPROVED', color: 'success' },
+  //   { message: 'Low stock warning', type: 'STOCK', color: 'warn' },
+  //   { message: 'Order shipped', type: 'ORDER', color: 'info' },
+  //   { message: 'New message', type: 'MESSAGE', color: 'secondary' },
+  // ];
   applyShow(pop: any) {
     this.tableColumns.forEach(col => {
       col.isCheck = this.showSelection.includes(col.field);
@@ -325,15 +290,14 @@ export class SellerList implements OnInit {
       case 2:
         this.actionbtns = actionBtns.filter((btn: any) =>
           btn.text === actionsKeys['view'] ||
-          btn.type === actionsKeys['edit']
+          btn.text === actionsKeys['edit']
         );
         break;
     }
-    this.actionbtns = this.actionbtns
+    // this.actionbtns = this.actionbtns
     this.getSellerList(this.activeTabIndex);
     this.getSellerCount();
   }
-
   getSellerList(index: number) {
     const reqPayLoad = {
       userId: localStorage.getItem('userId'),
